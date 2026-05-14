@@ -332,7 +332,7 @@ export default function InterviewRoom({
               placeholder="Type your answer... (Enter to send, Shift+Enter for new line)"
               rows={2}
               disabled={loading || aiThinking}
-              className="flex-1 resize-none border border-gray-200 rounded-xl px-4 py-3 text-sm
+              className="flex-1 resize-none border text-black border-gray-200 rounded-xl px-4 py-3 text-sm
           focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-50 disabled:text-gray-400"
             />
             <button
