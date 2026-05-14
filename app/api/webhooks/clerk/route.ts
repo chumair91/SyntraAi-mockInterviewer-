@@ -28,7 +28,10 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
   if (!WEBHOOK_SECRET) {
-    return NextResponse.json({ error: "Missing webhook secret" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Missing webhook secret" },
+      { status: 500 },
+    );
   }
 
   // Get the Svix headers Clerk sends with every webhook
@@ -38,7 +41,10 @@ export async function POST(req: Request) {
   const svix_signature = headerPayload.get("svix-signature");
 
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return NextResponse.json({ error: "Missing svix headers" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Missing svix headers" },
+      { status: 400 },
+    );
   }
 
   // Verify the signature — throws if invalid
@@ -60,24 +66,22 @@ export async function POST(req: Request) {
   // Handle the event type
   switch (evt.type) {
     case "user.created": {
-      const { id, email_addresses, first_name, last_name } = evt.data;
+      const { id, email_addresses } = evt.data;
       await prisma.user.create({
         data: {
           clerkId: id,
           email: email_addresses[0].email_address,
-          name: [first_name, last_name].filter(Boolean).join(" ") || null,
         },
       });
       break;
     }
 
     case "user.updated": {
-      const { id, email_addresses, first_name, last_name } = evt.data;
+      const { id, email_addresses } = evt.data;
       await prisma.user.update({
         where: { clerkId: id },
         data: {
           email: email_addresses[0].email_address,
-          name: [first_name, last_name].filter(Boolean).join(" ") || null,
         },
       });
       break;
