@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-import type { Interview } from "@prisma/client";
+
 import Link from "next/link";
 import RoleSelector from "@/components/role-selector";
 
@@ -40,7 +40,7 @@ export default async function DashboardPage() {
             Recent interviews
           </h2>
           <div className="space-y-2">
-            {dbUser.interviews.map((interview: Interview) => (
+            {dbUser.interviews.map((interview) => (
               <Link
                 key={interview.id}
                 href={`/interview/${interview.id}`}
