@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-import type { Interview } from "@/app/generated/prisma";
+import type { Interview } from "../../generated/prisma";
 
 import Link from "next/link";
 import RoleSelector from "@/components/role-selector";
