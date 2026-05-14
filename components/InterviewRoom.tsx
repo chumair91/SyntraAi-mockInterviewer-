@@ -163,7 +163,7 @@ export default function InterviewRoom({
             Interview Complete!
           </h2>
 
-          <p className="text-gray-500 mb-6">Here's how you did</p>
+          <p className="text-gray-500 mb-6">Here&apos;s how you did</p>
 
           <div className="text-6xl font-bold text-blue-600 mb-2">
             {avg.toFixed(1)}
