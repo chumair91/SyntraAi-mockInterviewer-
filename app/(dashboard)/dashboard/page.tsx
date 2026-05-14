@@ -14,17 +14,7 @@ type Interview = {
   userId: string;
 };
 
- interface Message {
-  id: string;
-  interviewId: string;
-  role: MessageRole;
-  content: string;
-  score: number | null;
-  feedback: string | null;
-  createdAt: Date;
-}
 
-type MessageRole = "AI" | "USER";
 
 export default async function DashboardPage() {
   const user = await currentUser();

@@ -3,6 +3,17 @@ import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
+ interface Message {
+  id: string;
+  interviewId: string;
+  role: MessageRole;
+  content: string;
+  score: number | null;
+  feedback: string | null;
+  createdAt: Date;
+}
+
+type MessageRole = "AI" | "USER";
 
 interface paramtype {
   id: string;
@@ -30,7 +41,7 @@ export default async function InterviewPage({
       interviewId={interview.id}
       role={interview.role}
       status={interview.status}  
-      initialMessages={interview.messages.map((m) => ({
+      initialMessages={interview.messages.map((m:Message) => ({
         id: m.id,
         role: m.role as "AI" | "USER",
         content: m.content,
