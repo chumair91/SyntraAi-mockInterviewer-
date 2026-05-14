@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
-
+import type { Interview } from "@/app/generated/prisma/client";
 import Link from "next/link";
 import RoleSelector from "@/components/role-selector";
 
@@ -19,7 +19,7 @@ export default async function DashboardPage() {
       },
     },
   });
-  const interviews = dbUser?.interviews ?? [];
+ const interviews: Interview[] = dbUser?.interviews ?? [];
 
   return (
     <div className="space-y-10">
