@@ -1,0 +1,16 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const globalForGemini = globalThis as unknown as {
+  gemini: GoogleGenerativeAI | undefined;
+};
+
+export const gemini =
+  globalForGemini.gemini ??
+  new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
+if (process.env.NODE_ENV !== "production") globalForGemini.gemini = gemini;
+
+// Helper to get the model — we'll use this in API routes
+export function getModel() {
+  return gemini.getGenerativeModel({ model: "gemini-3-flash-preview" });
+}
