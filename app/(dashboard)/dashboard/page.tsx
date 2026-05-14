@@ -1,11 +1,18 @@
 import { currentUser } from "@clerk/nextjs/server";
-import type { Interview } from "@/app/generated/prisma/client";
+
 import Link from "next/link";
 import RoleSelector from "@/components/role-selector";
 
 import { formatDate } from "@/lib/utils";
 import prisma from "@/lib/prisma";
-
+type Interview = {
+  id: string;
+  role: string;
+  status: string;
+  score: number | null;
+  createdAt: Date;
+  userId: string;
+};
 export default async function DashboardPage() {
   const user = await currentUser();
 
@@ -28,7 +35,7 @@ export default async function DashboardPage() {
         <h1 className="text-2xl font-semibold text-gray-900">
           Hey {user?.firstName ?? "there"} 👋
         </h1>
-        <p className="text-gray-500 mt-1">Pick  role and start practicing.</p>
+        <p className="text-gray-500 mt-1">Pick a role and start practicing.</p>
       </div>
 
       {/* Role selector */}
