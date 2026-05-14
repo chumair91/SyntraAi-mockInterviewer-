@@ -28,7 +28,7 @@ export default async function DashboardPage() {
         <h1 className="text-2xl font-semibold text-gray-900">
           Hey {user?.firstName ?? "there"} 👋
         </h1>
-        <p className="text-gray-500 mt-1">Pick a role and start practicing.</p>
+        <p className="text-gray-500 mt-1">Pick  role and start practicing.</p>
       </div>
 
       {/* Role selector */}
