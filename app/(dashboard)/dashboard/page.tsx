@@ -1,5 +1,4 @@
 import { currentUser } from "@clerk/nextjs/server";
-import type { Interview } from "../../generated/prisma";
 
 import Link from "next/link";
 import RoleSelector from "@/components/role-selector";
@@ -20,6 +19,7 @@ export default async function DashboardPage() {
       },
     },
   });
+  const interviews = dbUser?.interviews ?? [];
 
   return (
     <div className="space-y-10">
@@ -35,13 +35,13 @@ export default async function DashboardPage() {
       <RoleSelector />
 
       {/* Recent interviews */}
-      {dbUser?.interviews.length ? (
+      {interviews.length ? (
         <div>
           <h2 className="text-sm font-medium text-gray-500 mb-3 uppercase tracking-wide">
             Recent interviews
           </h2>
           <div className="space-y-2">
-            {dbUser.interviews.map((interview: Interview) => (
+            {interviews.map((interview) => (
               <Link
                 key={interview.id}
                 href={`/interview/${interview.id}`}
